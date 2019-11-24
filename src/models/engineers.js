@@ -5,8 +5,14 @@ class engineer {
     findBy (queryName = '', querySkill = '', queryId = '', orderBy = '', typeSort = '', limit = '', offset = '') {
 
         return new Promise( (resolve, reject) => {
-
-            conn.query(`SELECT * FROM vengineer WHERE name LIKE '%${queryName}%' AND nameSkill  LIKE '%${querySkill}%' AND id LIKE '%${queryId}%' ORDER BY ${orderBy} ${typeSort}  `, (err, result) =>
+            let query = `SELECT * FROM vengineer WHERE name LIKE '%${queryName}%' AND nameSkill  LIKE '%${querySkill}%' AND id LIKE '%${queryId}%' ORDER BY ${orderBy} ${typeSort}`
+            if (limit) {
+                query = query + ` LIMIT ${limit}`;
+            }
+            if (offset) {
+                query = query + ` OFFSET ${offset}`;
+            }
+            conn.query(query, (err, result) =>
             {
                 if (err) {
                     reject(err)

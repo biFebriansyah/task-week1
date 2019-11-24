@@ -10,8 +10,8 @@ server.use(bodyParser.urlencoded({extended: true}));
 server.use(bodyParser.json());
 server.use(morgan('dev'));
 
-// const router = require('./src/index')
-// server.use(router)
+const router = require('./src/main')
+server.use(router)
 
 
 server.listen(PORT, () => {

@@ -1,9 +1,8 @@
-function respon (res, status = 304, result = '') {
+function respon (res, status, result = '') {
 
     let desc = '';
 
-    switch (desc) {
-
+    switch (status) {
         case 200 :
             desc = "OK";
             break;
@@ -26,13 +25,13 @@ function respon (res, status = 304, result = '') {
             desc = "Not Modified";
             break;
         default :
-        desc = " "
+        desc = ""
     }
 
     const results = {
         status : status,
         description: desc,
-        result: {result}
+        result: [result]
     };
 
     res.status(status).json(results);

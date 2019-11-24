@@ -9,6 +9,28 @@ class verifying {
             name: joi.string().min(3).required(),
             dob: joi.date().required(),
             location: joi.string().required(),
+            id: joi.number(),
+            orderBy: joi.string().required(),
+            typeSort: joi.string().required(),
+            limit: joi.number(),
+            offset: joi.number()
+            
+        })
+    
+        return schema.validate(reqData)
+    }
+
+    validGet (reqData) {
+
+        const schema = joi.object({
+
+            name: joi.string().min(3),
+            skill: joi.string(),
+            id: joi.number(),
+            orderBy: joi.string().required(),
+            typeSort: joi.string().required(),
+            limit: joi.number(),
+            offset: joi.number()
             
         })
     

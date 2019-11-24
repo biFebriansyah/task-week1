@@ -1,6 +1,6 @@
 const modules = require('../models/engineers');
-const validate = require('../helper/validate');
-const respon = require('../helper/respon');
+const validate = require('../helpers/validate');
+const respon = require('../helpers/respon');
 
 const valid = new validate();
 const model = new modules();
@@ -9,6 +9,10 @@ module.exports = {
 
     findBy: async (req, res) => {
 
+        const {error} = valid.validGet(req.query);
+        if (error) {
+            return respon(res, 400, error.details[0].message);
+        }
         let queryName = req.query.name
         let querySkill = req.query.skill
         let queryId = req.query.id
@@ -43,7 +47,7 @@ module.exports = {
 
         try {
             let result = await model.add(data);
-            return respon(res, 200, result);
+            return respon(res, 201, result);
     
         } catch (error) {
             return respon(res, 500, error);
@@ -68,7 +72,7 @@ module.exports = {
     
         try {
             let result = await model.update(data, userId);
-            return respon(res, 200, result);
+            return respon(res, 201, result);
     
         } catch (error) {
             return respon(res, 500, error);
