@@ -17,8 +17,7 @@ class verifying {
             offset: joi.number()
             
         })
-    
-        return schema.validate(reqData)
+        return schema.validate(reqData);
     }
 
     validGet (reqData) {
@@ -33,21 +32,22 @@ class verifying {
             limit: joi.number(),
             offset: joi.number()
             
-        })
+        });
     
-        return schema.validate(reqData)
+        return schema.validate(reqData);
     }
 
     validateCompany (reqData) {
 
         const schema = joi.object({
+
             name: joi.string().min(3).required(),
-            logo: joi.link(),
+            logo: joi.string(),
             location: joi.string().required(),
-            description: joi.string().min(10),
-        })
+            description: joi.string().required()
+        });
     
-        return schema.validate(reqData)
+        return schema.validate(reqData);
     }
 
     validateRegister (reqData) {

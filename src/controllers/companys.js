@@ -1,16 +1,15 @@
 const models = require('../models/companys');
 const respon = require('../helpers/respon');
-const verifies = require('../helpers/validate');
+const validate = require('../helpers/validate');
 
+const valid = new validate();
 const model = new models();
-const verfy = new verifies();
 
 module.exports = {
 
     findBy: async (req, res) => {
-
         try {
-            const result = model.findBy();
+            const result = await model.findBy();
             return respon(res, 200, result);
 
         } catch (error) {
@@ -20,10 +19,6 @@ module.exports = {
 
     add: async (req, res) => {
 
-        const {error} = verfy.validateCompany(req.body)
-        if (error) {
-            return respon(res, 400, error.details[0].message);
-        }
         const data = {
             name: req.body.name,
             logo: req.body.logo,
@@ -31,9 +26,16 @@ module.exports = {
             description: req.body.description,
         };
 
+        const {error} = valid.validateCompany(data);
+
+        if (error) {
+            return respon(res, 400, error.details[0].message);
+        }
+
         try {
-            const result = model.add(data);
+            const result = await model.add(data);
             return respon(res, 200, result);
+
         } catch (error) {
             return respon(res, 500, error);
         }
@@ -41,20 +43,24 @@ module.exports = {
 
     update: async (req, res) => {
 
-        const {error} = verfy.validateCompany(req.body)
-        if (error) {
-            return respon(res, 400, error.details[0].message);
-        }
         const data = {
             name: req.body.name,
             logo: req.body.logo,
             location: req.body.location,
             description: req.body.description,
         };
+
+        
+        const {error} = valid.validateCompany(data)
+        
+        if (error) {
+            return respon(res, 400, error.details[0].message);
+        }
+
         const idCompany = req.params.iduser
 
         try {
-            const result = model.update(data, idCompany);
+            const result = await model.update(data, idCompany);
             return respon(res, 200, result);
         } catch (error) {
             return respon(res, 500, error);
@@ -64,8 +70,9 @@ module.exports = {
     destroy: async (res, req) => {
 
         const idCompany = req.params.iduser
+
         try {
-            const result = model.destroy(idCompany);
+            const result = await model.destroy(idCompany);
             return respon(res, 200, result);
         } catch (error) {
             return respon(res, 500, error);

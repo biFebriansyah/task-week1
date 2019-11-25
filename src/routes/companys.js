@@ -6,8 +6,8 @@ const company = express.Router()
 
 company
     .get('/', control.findBy)
-    .post('/', control.add)
-    .put('/company/:id', control.update)
-    .delete('/company/:id', control.destroy)
+    .post('/add', control.add)
+    .put('/update', control.update)
+    .delete('/rm', control.destroy)
 
 module.exports = company

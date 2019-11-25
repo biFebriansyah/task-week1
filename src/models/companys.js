@@ -3,10 +3,9 @@ const conn = require('../configs/conn');
 class company {
 
     findBy () {
-        return respon(res, 200, 'masuk');
         return new Promise( (resolve, reject) => {
-
-            conn.query("SELECT * FROM company", (err, result) =>
+            console.log("masuk");
+            conn.query("SELECT * FROM company asa", (err, result) =>
             {
                 if (err) {
                     reject(err)
