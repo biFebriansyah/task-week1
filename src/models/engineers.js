@@ -31,11 +31,9 @@ class engineer {
             conn.query("INSERT INTO engineer SET ?", data, (err, result) =>
             {
                 if (err) {
-    
                     reject(err)
                 }
                 else {
-    
                     resolve(result);
                 }
             })
@@ -50,11 +48,9 @@ class engineer {
             conn.query(query, [data.name, data.dob, data.location, data.update_at, iduser], (err, result) =>
             {
                 if (err) {
-    
                     reject(err)
                 }
                 else {
-                    
                     resolve(result);
                 }
             })
@@ -68,11 +64,9 @@ class engineer {
             conn.query("DELETE FROM engineer WHERE id= ?", iduser, (err, result) =>
             {
                 if (err) {
-    
                     reject(err)
                 }
                 else {
-                    
                     resolve(result);
                 }
             })

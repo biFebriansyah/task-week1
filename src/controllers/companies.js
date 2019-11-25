@@ -1,4 +1,4 @@
-const models = require('../models/companys');
+const models = require('../models/companies');
 const respon = require('../helpers/respon');
 const validate = require('../helpers/validate');
 

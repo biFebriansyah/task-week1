@@ -1,7 +1,7 @@
 const express = require('express');
 const engineer = require('./routes/engineers');
-const company = require('./routes/companys');
-// const register = require('./routes/Register');
+const company = require('./routes/companies');
+const register = require('./routes/register');
 // const login = require('./routes/Login');
 
 
@@ -10,7 +10,7 @@ const mainRouter = express.Router()
 
 mainRouter.use('/engineer', engineer)
 mainRouter.use('/company', company)
-// mainRouter.use('/register', register)
+mainRouter.use('/register', register)
 // mainRouter.use('/login', login)
 
 module.exports = mainRouter

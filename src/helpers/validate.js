@@ -1,5 +1,5 @@
 const joi = require('@hapi/joi');
-
+const check = '../models/check.js';
 
 class verifying {
 

@@ -23,11 +23,9 @@ class company {
             conn.query("INSERT INTO company SET ?", data, (err, result) =>
             {
                 if (err) {
-    
                     reject(err)
                 }
                 else {
-    
                     resolve(result);
                 }
             })
