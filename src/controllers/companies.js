@@ -69,8 +69,8 @@ module.exports = {
 
     destroy: async (res, req) => {
 
-        const idCompany = req.params.iduser
-
+        const idCompany = req.params.id;
+        console.log('masuk');
         try {
             const result = await model.destroy(idCompany);
             return respon(res, 200, result);

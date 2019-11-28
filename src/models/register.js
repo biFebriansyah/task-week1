@@ -7,12 +7,10 @@ const register = (data) => {
         conn.query(`INSERT INTO users SET ?`, data, (err, result) =>
         {
             if (err) {
-                conn.end();
                 reject(err);
             }
             else {
                 resolve(result);
-                conn.end();
             }
         });
     })
