@@ -8,7 +8,7 @@ const Engineer = express.Router();
 Engineer
     .use('*', cloudinaryConfig)
     .get('/', control.findBy)
-    .post('/', multerUploads.single('logo'), control.add)
+    .post('/', multerUploads.single('photo'), control.add)
     .put('/engineer/:id', control.update)
     .delete('/engineer/:id', control.destroy)
 

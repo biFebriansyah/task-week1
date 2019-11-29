@@ -35,25 +35,31 @@ module.exports = {
 
     add: async (req, res) => {
 
-        // if (req.file) {
-        //     const file = dataUri(req).content;
-        //     const test = await uploader.upload(file,{folder: "hiringapp/company/logo"})
+        if (req.file) {
+            const file = dataUri(req).content;
+            uploader.upload(file,{folder: "engineer/picture"}
+          ).then((result) => {
 
-        let data = {
-            name: req.body.name,
-            dob: new Date().toISOString().slice(0, 19).replace('T', ' '),
-            location: req.body.location,
-            create_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
-            update_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
-        };
-
-        try {
-
-            let result = await model.add(data);
-            return respon(res, 201, result);
+            let data = {
+                name: req.body.name,
+                dob: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                location: req.body.location,
+                photo: result.url,
+                create_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                update_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
+            };
     
-        } catch (error) {
-            return respon(res, 500, error);
+                model.add(data)
+                .then(result => {
+                    return respon(res, 201, result);
+                })
+                .catch(err => {
+                    return respon(res, 400, err)
+                })
+
+
+          }).catch((error) => {
+              return error })
         }
     },
 

@@ -5,7 +5,8 @@ class engineer {
     findBy (queryName = '', querySkill = '', queryId = '', orderBy = 'name', typeSort = 'asc', limit = '', offset = '') {
 
         return new Promise( (resolve, reject) => {
-            let query = `SELECT * FROM vengineer WHERE name LIKE '%${queryName}%' AND nameSkill  LIKE '%${querySkill}%' AND id LIKE '%${queryId}%' ORDER BY ${orderBy} ${typeSort}`
+            // SELECT * FROM vengineer WHERE name LIKE '%${queryName}%' AND nameSkill  LIKE '%${querySkill}%' AND id LIKE '%${queryId}%' ORDER BY ${orderBy} ${typeSort}
+            let query = "SELECT * FROM vengineer"
             if (limit) {
                 query = query + ` LIMIT ${limit}`;
             }
