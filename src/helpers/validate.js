@@ -57,7 +57,8 @@ class verifying {
             password: joi.string().min(6).required(),
             name: joi.string().required(),
             email: joi.string().email().required(),
-            role: joi.required()
+            role: joi.required(),
+            confirm: joi.string()
         })
     
         return schema.validate(reqData)

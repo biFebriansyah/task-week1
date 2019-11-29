@@ -2,12 +2,13 @@ const jwt = require('jsonwebtoken');
 const brcypt = require('bcryptjs');
 const uid = require('uuid/v4');
 const login = require('../models/login')
+const respone = require('../helpers/respon');
 
 const setToken = new login()
 
 class auth {
 
-    async loginValidate (reqData, dbData) {
+    async loginValidate (res, reqData, dbData) {
 
         if (dbData.length != 0) {
 
@@ -33,18 +34,18 @@ class auth {
                         role: role
                     }
         
-                    return result
+                    return respone(res, 200, result);
                     
                 } catch(error) {
-                    return error;
+                    return respone(res, 500, error);
                 }
 
             } else {
-                return 'password wrong!'
+                return respone(res, 400, 'password wrong!');
             }
 
         } else {
-            return 'Check your email'
+            return respone(res, 400, 'Check your email');
         }
     }
 }

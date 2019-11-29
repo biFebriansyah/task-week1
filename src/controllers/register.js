@@ -15,7 +15,7 @@ const regis = async (req, res) => {
     if (error) {
         return respon(res, 400, error.details[0].message);
     }
-    
+
     const passwordHash = getHash(req.body.password);
 
     const data = {
@@ -54,4 +54,4 @@ const regis = async (req, res) => {
     }
 }
 
-module.exports = regis 
+module.exports = regis

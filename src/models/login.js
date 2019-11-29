@@ -25,7 +25,7 @@ class getLogin {
 
         return new Promise ((resolve, reject) => {
 
-            conn.query('INSERT INTO users userToken = ? WHERE username = ? ',[token, username], (err, result) => {
+            conn.query(`UPDATE users SET userToken = '${token}' WHERE username = '${username}'`, (err, result) => {
 
                 if (err) {
                     reject(err);

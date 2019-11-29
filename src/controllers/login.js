@@ -14,8 +14,7 @@ const Login = async (req, res) => {
     try {
 
         const dbData = await getLogin.getPassword(data.username);
-        const validate = authentic.loginValidate(data, dbData);
-        return respon(res, 200, validate);
+        authentic.loginValidate(res, data, dbData);
 
     } catch (error) {
 
