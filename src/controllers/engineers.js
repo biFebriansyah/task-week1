@@ -11,11 +11,11 @@ module.exports = {
 
     findBy: async (req, res) => {
 
-        // const {error} = valid.validGet(req.query);
+        const {error} = valid.validGet(req.query);
 
-        // if (error) {
-        //     return respon(res, 400, error.details[0].message);
-        // }
+        if (error) {
+            return respon(res, 400, error.details[0].message);
+        }
         
         let queryName = req.query.name
         let querySkill = req.query.skill
