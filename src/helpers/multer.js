@@ -15,9 +15,6 @@ const fileFilter = (req, file, cb) => {
 
 const multerUploads = multer({ 
   storage,
-  // limits: {
-  //   fileSize: 1024 * 1024 * 5
-  // },
   fileFilter: fileFilter
 });
 const dUri = new Datauri();

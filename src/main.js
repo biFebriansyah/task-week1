@@ -3,7 +3,7 @@ const engineer = require('./routes/engineers');
 const company = require('./routes/companies');
 const register = require('./routes/register');
 const login = require('./routes/login');
-const test = require('./routes/test');
+const project = require('./routes/project');
 
 
 
@@ -13,7 +13,7 @@ mainRouter.use('/engineer', engineer)
 mainRouter.use('/company', company)
 mainRouter.use('/register', register)
 mainRouter.use('/login', login)
-mainRouter.use('/test', test)
+mainRouter.use('/project', project)
 
 module.exports = mainRouter
 
