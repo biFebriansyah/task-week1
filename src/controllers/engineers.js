@@ -1,8 +1,8 @@
 const modules = require('../models/engineers');
 const validate = require('../helpers/validate');
+const upload = require('../helpers/test');
 const respon = require('../helpers/respon');
-const { uploader } = require('cloudinary');
-const { dataUri } = require('../helpers/multer');
+const {uploader} = require('cloudinary').v2;
 
 const valid = new validate();
 const model = new modules();
@@ -11,11 +11,11 @@ module.exports = {
 
     findBy: async (req, res) => {
 
-        const {error} = valid.validGet(req.query);
+        // const {error} = valid.validGet(req.query);
 
-        if (error) {
-            return respon(res, 400, error.details[0].message);
-        }
+        // if (error) {
+        //     return respon(res, 400, error.details[0].message);
+        // }
         
         let queryName = req.query.name
         let querySkill = req.query.skill
@@ -35,38 +35,41 @@ module.exports = {
 
     add: async (req, res) => {
 
-        if (req.file) {
-            console.log("req file is :" + req.file);
-            const file = dataUri(req).content;
-            uploader.upload(file,{folder: "engineer/picture"}
-          ).then((result) => {
-
-            let data = {
-                username: req.body.username,
-                name: req.body.name,
-                dob: req.body.dob,
-                skill: req.body.skill,
-                location: req.body.location,
-                photo: result.url,
-                git_url: req.body.git,
-                description: req.body.desc,
-                create_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
-                update_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
-            };
-
-            model.add(data)
-            .then(result => {
-                return respon(res, 201, result);
-            })
-            .catch(err => {
+        let photo = ''
+        upload(req, res, (err) => {
+            if (err) {
                 return respon(res, 400, err)
-            })
-
-
-          }).catch((error) => {
-            return respon(res, 500, error)
-            })
-        }
+            } else {
+                uploader.upload(req.file.path, {folder: 'engineer/picture', use_filename: true}, (err, result) => {
+                    if (err) {
+                        return respon(res, 500, err)
+                    } else {
+                        photo = result.url;
+                    }
+                })
+            }
+        })
+    
+        let data = {
+            username: req.body.username,
+            name: req.body.name,
+            dob: req.body.dob,
+            skill: req.body.skill,
+            location: req.body.location,
+            photo: photo,
+            git_url: req.body.git,
+            description: req.body.desc,
+            create_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
+            update_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
+        };
+        
+        model.add(data)
+        .then(result => {
+            return respon(res, 201, result);
+        })
+        .catch(err => {
+            return respon(res, 400, err)
+        })
     },
 
     update: async (req, res) => {
