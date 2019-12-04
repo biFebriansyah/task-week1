@@ -5,7 +5,7 @@ const path = require('path')
 const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
-  // reject a file
+  
   if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
     cb(null, true);
   } else {

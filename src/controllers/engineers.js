@@ -1,8 +1,7 @@
 const modules = require('../models/engineers');
 const validate = require('../helpers/validate');
-const upload = require('../helpers/test');
 const respon = require('../helpers/respon');
-const {uploader} = require('cloudinary').v2;
+const upload = require('../helpers/upload');
 
 const valid = new validate();
 const model = new modules();
@@ -35,21 +34,20 @@ module.exports = {
 
     add: async (req, res) => {
 
-        let photo = ''
-        upload(req, res, (err) => {
-            if (err) {
-                return respon(res, 400, err)
-            } else {
-                uploader.upload(req.file.path, {folder: 'engineer/picture', use_filename: true}, (err, result) => {
-                    if (err) {
-                        return respon(res, 500, err)
-                    } else {
-                        photo = result.url;
-                    }
-                })
-            }
-        })
-    
+        let photo = req.files.photo[0]
+        const path = process.cwd() + '\\src\\upload\\image\\' + Date.now() + "-" + photo.name;
+        photo.mv(path)
+
+        let url = ''
+        try {
+            let result = await uploader.upload(pathFile, {folder: 'engineer/picture', use_filename: true})
+            url = result.url
+        } catch (error) {
+            return error
+        }
+
+        return respon(res, 200, url);
+
         let data = {
             username: req.body.username,
             name: req.body.name,
