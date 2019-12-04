@@ -29,7 +29,8 @@ class engineer {
 
         return new Promise( (resolve, reject) => {
 
-            conn.query("INSERT INTO engineer SET ?", data, (err, result) =>
+            let query = "INSERT INTO engineer SET username = ?, name = ?, dob = ?, skill = ?, location = ?, photo = ?, git_url = ?, description = ?, create_at = ?, update_at = ?"
+            conn.query(query, [data.username, data.name, data.dob, data.skill, data.location, data.photo, data.git_url, data.description, data.create_at, data.update_at], (err, result) =>
             {
                 if (err) {
                     reject(err)

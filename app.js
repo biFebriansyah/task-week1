@@ -11,6 +11,7 @@ server.use(bodyParser.urlencoded({extended: true}));
 server.use(bodyParser.json());
 server.use(morgan('dev'));
 server.use(cors())
+server.use(express.static('./src/public'))
 
 const router = require('./src/main')
 server.use(router)

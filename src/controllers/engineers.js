@@ -36,30 +36,36 @@ module.exports = {
     add: async (req, res) => {
 
         if (req.file) {
+            console.log("req file is :" + req.file);
             const file = dataUri(req).content;
             uploader.upload(file,{folder: "engineer/picture"}
           ).then((result) => {
 
             let data = {
+                username: req.body.username,
                 name: req.body.name,
-                dob: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                dob: req.body.dob,
+                skill: req.body.skill,
                 location: req.body.location,
                 photo: result.url,
+                git_url: req.body.git,
+                description: req.body.desc,
                 create_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
                 update_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
             };
-    
-                model.add(data)
-                .then(result => {
-                    return respon(res, 201, result);
-                })
-                .catch(err => {
-                    return respon(res, 400, err)
-                })
+
+            model.add(data)
+            .then(result => {
+                return respon(res, 201, result);
+            })
+            .catch(err => {
+                return respon(res, 400, err)
+            })
 
 
           }).catch((error) => {
-              return error })
+            return respon(res, 500, error)
+            })
         }
     },
 
