@@ -104,5 +104,10 @@ module.exports = {
         } catch (error) {
             return respon(res, 500, error);
         }
+    },
+
+    getBy: async (req, res) => {
+
+        return respon(res, 200, req.body.username);
     }
 }
