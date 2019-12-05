@@ -6,8 +6,9 @@ const { cloudinaryConfig } = require('../configs/cloudinary');
 const Engineer = express.Router();
 
 Engineer
-    .use('*', cloudinaryConfig)
+    //.use('*', cloudinaryConfig)
     .get('/', control.findBy)
+    .get('/username', control.getDataBy)
     .post('/', control.add)
     .put('/engineer/:id', control.update)
     .delete('/engineer/:id', control.destroy)
