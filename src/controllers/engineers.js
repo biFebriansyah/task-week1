@@ -2,6 +2,7 @@ const modules = require('../models/engineers');
 const validate = require('../helpers/validate');
 const respon = require('../helpers/respon');
 const upload = require('../helpers/upload');
+const pathFIle = require('path');
 
 const valid = new validate();
 const model = new modules();
@@ -37,16 +38,18 @@ module.exports = {
         if (!req.files) {
             return respon(res, 400, "Photo required");
         }
+
         let photo = ''
+        let urlPhoto = ''
         if (req.files.photo.name) {
             photo = req.files.photo
         } else {
             photo = req.files.photo[0]
         }
-
-        const path = process.cwd() + '\\src\\upload\\image\\' + Date.now() + "-" + photo.name;
+        const extension = pathFIle.extname(photo.name)
+        const path = process.cwd() + '\\src\\upload\\image\\' + 'Photo-'+ Date.now()  + extension;
         photo.mv(path)
-        const photoUrl = await upload(path)
+        return respon(res, 200, path);
 
         let data = {
             username: req.body.username,
