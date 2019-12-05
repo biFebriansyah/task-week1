@@ -10,12 +10,6 @@ const model = new modules();
 module.exports = {
 
     findBy: async (req, res) => {
-
-        // const {error} = valid.validGet(req.query);
-
-        // if (error) {
-        //     return respon(res, 400, error.details[0].message);
-        // }
         
         let queryName = req.query.name
         let querySkill = req.query.skill
@@ -63,7 +57,13 @@ module.exports = {
             create_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
             update_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
         };
-        
+
+        const {error} = valid.validateEnginer(data);
+
+        if (error) {
+            return respon(res, 400, error.details[0].message);
+        }
+
         model.add(data)
         .then(result => {
             return respon(res, 201, result);
@@ -112,7 +112,7 @@ module.exports = {
 
     getDataBy: async (req, res) => {
 
-        const user = req.body.username;
+        const user = req.params.username;
 
         try {
             let result = await model.getDataBy(user);
