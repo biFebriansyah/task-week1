@@ -110,19 +110,17 @@ module.exports = {
         }
     },
 
-    getDataBy: async (res, req) => {
+    getDataBy: async (req, res) => {
 
-        // let test = req.body.username;
-        await console.log(req.body);
-        // let user = req.body.username
+        const user = req.body.username;
 
-        // try {
-        //     let result = await model.getDataBy(user);
-        //     return respon(res, 200, result);
+        try {
+            let result = await model.getDataBy(user);
+            return respon(res, 200, result);
     
-        // } catch (error) {
-        //     return respon(res, 500, error);
-        // }
+        } catch (error) {
+            return respon(res, 500, error);
+        }
     },
 
 }
