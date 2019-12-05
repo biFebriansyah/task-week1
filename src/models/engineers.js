@@ -2,7 +2,7 @@ const conn = require('../configs/conn');
 
 class engineer {
 
-    findBy (queryName = '', querySkill = '', queryId = '', orderBy = 'name', typeSort = 'asc', limit = '', offset = '') {
+    findBy (queryName = '', querySkill = '', queryId = '', orderBy = 'name', typeSort = 'desc', limit = '', offset = '') {
 
         return new Promise( (resolve, reject) => {
             // SELECT * FROM vengineer WHERE name LIKE '%${queryName}%' AND nameSkill  LIKE '%${querySkill}%' AND id LIKE '%${queryId}%' ORDER BY ${orderBy} ${typeSort}

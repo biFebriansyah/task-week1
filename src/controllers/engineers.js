@@ -40,7 +40,7 @@ module.exports = {
         }
 
         let photo = ''
-        let urlPhoto = ''
+
         if (req.files.photo.name) {
             photo = req.files.photo
         } else {
@@ -48,8 +48,8 @@ module.exports = {
         }
         const extension = pathFIle.extname(photo.name)
         const path = process.cwd() + '\\src\\upload\\image\\' + 'Photo-'+ Date.now()  + extension;
-        photo.mv(path)
-        return respon(res, 200, path);
+        await photo.mv(path)
+        const url = await upload(path);
 
         let data = {
             username: req.body.username,
@@ -57,7 +57,7 @@ module.exports = {
             dob: req.body.dob,
             skill: req.body.skill,
             location: req.body.location,
-            photo: photo,
+            photo: url,
             git_url: req.body.git,
             description: req.body.desc,
             create_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
