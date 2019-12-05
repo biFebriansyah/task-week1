@@ -34,19 +34,19 @@ module.exports = {
 
     add: async (req, res) => {
 
-        let photo = req.files.photo[0]
-        const path = process.cwd() + '\\src\\upload\\image\\' + Date.now() + "-" + photo.name;
-        photo.mv(path)
-
-        let url = ''
-        try {
-            let result = await uploader.upload(pathFile, {folder: 'engineer/picture', use_filename: true})
-            url = result.url
-        } catch (error) {
-            return error
+        if (!req.files) {
+            return respon(res, 400, "Photo required");
+        }
+        let photo = ''
+        if (req.files.photo.name) {
+            photo = req.files.photo
+        } else {
+            photo = req.files.photo[0]
         }
 
-        return respon(res, 200, url);
+        const path = process.cwd() + '\\src\\upload\\image\\' + Date.now() + "-" + photo.name;
+        photo.mv(path)
+        const photoUrl = await upload(path)
 
         let data = {
             username: req.body.username,

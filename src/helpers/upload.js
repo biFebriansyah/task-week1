@@ -9,7 +9,6 @@ async function upload(pathFile) {
     } catch (error) {
         return error
     }
-    
     return url
 }
 
