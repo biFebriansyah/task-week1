@@ -41,7 +41,6 @@ module.exports = {
             name: req.body.name,
             logo: url,
             location: req.body.location,
-            email: req.body.email,
             telp: req.body.telp,
         };
 
