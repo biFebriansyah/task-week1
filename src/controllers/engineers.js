@@ -110,12 +110,6 @@ module.exports = {
         }
     },
 
-<<<<<<< HEAD
-    getBy: async (req, res) => {
-
-        return respon(res, 200, req.body.username);
-    }
-=======
     getDataBy: async (req, res) => {
 
         const user = req.params.username;
@@ -129,5 +123,4 @@ module.exports = {
         }
     },
 
->>>>>>> suhu
 }

@@ -8,13 +8,8 @@ const Engineer = express.Router();
 Engineer
     .use('*', cloudinaryConfig)
     .get('/', control.findBy)
-<<<<<<< HEAD
-    .get('/username', control.getBy)
-    .post('/', multerUploads.single('photo'), control.add)
-=======
     .get('/:username', control.getDataBy)
     .post('/', control.add)
->>>>>>> suhu
     .put('/engineer/:id', control.update)
     .delete('/engineer/:id', control.destroy)
 
