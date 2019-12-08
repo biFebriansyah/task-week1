@@ -61,6 +61,21 @@ class company {
             })
         })
     }
+
+    getDataBy(data) {
+        return new Promise( (resolve, reject) => {
+
+            conn.query("SELECT * FROM company WHERE username = ?", data, (err, result) =>
+            {
+                if (err) {
+                    reject(err)
+                }
+                else {
+                    resolve(result);
+                }
+            })
+        })
+    }
 }
 
 module.exports = company

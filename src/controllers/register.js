@@ -21,7 +21,6 @@ const regis = async (req, res) => {
     const data = {
         username: req.body.username,
         password: passwordHash,
-        name: req.body.name,
         email: req.body.email,
         role: req.body.role,
         create_at: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),

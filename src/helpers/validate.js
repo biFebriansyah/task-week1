@@ -6,16 +6,17 @@ class verifying {
     validateEnginer (reqData) {
 
         const schema = joi.object({
-
-            name: joi.string().min(3).required(),
-            dob: joi.date().required(),
-            location: joi.string().required(),
-            id: joi.number(),
-            orderBy: joi.string().required(),
-            typeSort: joi.string().required(),
-            limit: joi.number(),
-            offset: joi.number()
             
+            name: joi.required(),
+            dob: joi.required(),
+            skill: joi.required(),
+            location: joi.required(),
+            git_url: joi.required(),
+            username: joi.required(),
+            description: joi.required(),
+            photo: joi.required(),
+            create_at: joi.required(),
+            update_at: joi.required()
         })
         return schema.validate(reqData);
     }
@@ -55,10 +56,8 @@ class verifying {
         const schema = joi.object({
             username: joi.string().min(3).required(),
             password: joi.string().min(6).required(),
-            name: joi.string().required(),
             email: joi.string().email().required(),
             role: joi.required(),
-            confirm: joi.string()
         })
     
         return schema.validate(reqData)

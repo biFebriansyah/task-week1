@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
+const upload = require('express-fileupload');
 
 
 const server = express()
@@ -10,11 +11,12 @@ const PORT = process.env.PORT
 server.use(bodyParser.urlencoded({extended: true}));
 server.use(bodyParser.json());
 server.use(morgan('dev'));
-server.use(cors())
-server.use(express.static('./src/public'))
+server.use(cors());
+server.use(express.static(__dirname + '/src/upload'));
+server.use(upload());
 
-const router = require('./src/main')
-server.use(router)
+const router = require('./src/main');
+server.use(router);
 
 
 server.listen(PORT, () => {

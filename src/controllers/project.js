@@ -13,7 +13,8 @@ class project {
             salary: req.body.salary,
             description: req.body.description
         };
-
+        return respon(res, 200, data);
+        
         try {
             await models.add(data);
             respon(res, 201, 'success');
